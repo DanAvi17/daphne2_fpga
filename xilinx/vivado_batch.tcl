@@ -18,6 +18,11 @@ read_vhdl ../front_end/febit.vhd
 read_vhdl ../front_end/auto_fsm.vhd
 read_vhdl ../front_end/auto_afe.vhd
 read_vhdl ../front_end/front_end.vhd
+read_vhdl ../front_end/Self-trigger_VHDL.vhd
+read_vhdl ../front_end/highPass_FirstOrder.vhd
+read_vhdl ../front_end/dsp_slice.vhd
+read_vhdl ../front_end/AFE_self_trigger.vhd
+read_vhdl ../front_end/front_end.vhd
 
 read_vhdl ../spy/spy.vhd
 read_vhdl ../spi/spi.vhd
@@ -128,9 +133,9 @@ read_xdc -verbose ./constraints.xdc
 # Note this is a 7 character HEX string, e.g. 28 bits, but Vivado requires 
 # this number to be in Verilog notation, even if the top level source is VHDL.
 
-set git_sha [exec git rev-parse --short=7 HEAD]
-set v_git_sha "28'h$git_sha"
-puts "INFO: passing git commit number $v_git_sha to top level generic"
+#set git_sha [exec git rev-parse --short=7 HEAD]
+set v_git_sha "28'h1234567"
+#puts "INFO: passing git commit number $v_git_sha to top level generic"
 
 # synth design...
 
@@ -171,7 +176,8 @@ report_io -file $outputDir/io.rpt
 
 # generate bitstream...
 
-write_bitstream -force -bin_file $outputDir/daphne2_$git_sha.bit
+#write_bitstream -force -bin_file $outputDir/daphne2_$git_sha.bit
+write_bitstream -force -bin_file $outputDir/daphne2_0
 
 # write out ILA debug probes file
 write_debug_probes -force $outputDir/probes.ltx
