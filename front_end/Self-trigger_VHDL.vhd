@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company: 
--- Engineer: Edgar Rincón-Gil
+-- Engineer: Edgar RincÃ³n-Gil
 -- 
 -- Create Date: 11/17/2022 09:58:39 AM
 -- Design Name: self-trigger
@@ -190,8 +190,12 @@ architecture Behavioral of self_trigger is
  signal r_multdata_62       : signed(g_MULT_WIDTH - 1 downto 0):= to_signed(0, g_MULT_WIDTH);
  signal r_multdata_63       : signed(g_MULT_WIDTH - 1 downto 0):= to_signed(0, g_MULT_WIDTH);
  signal r_sumamult          : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+ signal r_sumamult1          : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+ signal r_sumamult2          : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+ signal r_sumamult3          : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+ signal r_sumamult4          : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
  
- signal r_pedestal      : signed(g_INPUT_WIDTH - 1 downto 0):= to_signed(0, g_INPUT_WIDTH);
+ -- signal r_pedestal      : signed(g_INPUT_WIDTH - 1 downto 0):= to_signed(0, g_INPUT_WIDTH);
  
  -- Constantes
 -- type TEMPLATE is array(0 to 63) of signed(g_INPUT_WIDTH - 1 downto 0);
@@ -402,24 +406,24 @@ begin
     end process;
 
     --Sumar los registros para obtener el pedestal
-    process(clk)
-    begin
-        if rising_edge(clk) then
-            r_pedestal <= shift_right(r_data_0 + r_data_1 + r_data_2 + r_data_3 + 
-                r_data_4 + r_data_5 + r_data_6 + r_data_7 + r_data_8 +
-                r_data_9 + r_data_10 + r_data_11 + r_data_12 + r_data_13 +
-                r_data_14 + r_data_15 + r_data_16 + r_data_17 + r_data_18 +
-                r_data_19 + r_data_20 + r_data_21 + r_data_22 + r_data_23 +
-                r_data_24 + r_data_25 + r_data_26 + r_data_27 + r_data_28 +
-                r_data_29 + r_data_30 + r_data_31 + r_data_32 + r_data_33 +
-                r_data_34 + r_data_35 + r_data_36 + r_data_37 + r_data_38 +
-                r_data_39 + r_data_40 + r_data_41 + r_data_42 + r_data_43 +
-                r_data_44 + r_data_45 + r_data_46 + r_data_47 + r_data_48 +
-                r_data_49 + r_data_50 + r_data_51 + r_data_52 + r_data_53 +
-                r_data_54 + r_data_55 + r_data_56 + r_data_57 + r_data_58 +
-                r_data_59 + r_data_60 + r_data_61 + r_data_62 + r_data_63, 6);
-        end if;
-    end process;
+--    process(clk)
+--    begin
+--        if rising_edge(clk) then
+--            r_pedestal <= shift_right(r_data_0 + r_data_1 + r_data_2 + r_data_3 + 
+--                r_data_4 + r_data_5 + r_data_6 + r_data_7 + r_data_8 +
+--                r_data_9 + r_data_10 + r_data_11 + r_data_12 + r_data_13 +
+--                r_data_14 + r_data_15 + r_data_16 + r_data_17 + r_data_18 +
+--                r_data_19 + r_data_20 + r_data_21 + r_data_22 + r_data_23 +
+--                r_data_24 + r_data_25 + r_data_26 + r_data_27 + r_data_28 +
+--                r_data_29 + r_data_30 + r_data_31 + r_data_32 + r_data_33 +
+--                r_data_34 + r_data_35 + r_data_36 + r_data_37 + r_data_38 +
+--                r_data_39 + r_data_40 + r_data_41 + r_data_42 + r_data_43 +
+--                r_data_44 + r_data_45 + r_data_46 + r_data_47 + r_data_48 +
+--                r_data_49 + r_data_50 + r_data_51 + r_data_52 + r_data_53 +
+--                r_data_54 + r_data_55 + r_data_56 + r_data_57 + r_data_58 +
+--                r_data_59 + r_data_60 + r_data_61 + r_data_62 + r_data_63, 6);
+--        end if;
+--    end process;
     
     --Sumar los registros para obtener el pedestal
     process(clk)
@@ -524,12 +528,21 @@ begin
 --                r_multdata_55 + r_multdata_56 + r_multdata_57 + r_multdata_58 +
 --                r_multdata_59 + r_multdata_60 + r_multdata_61 + r_multdata_62 + 
 --                r_multdata_63);
-r_sumamult <= (r_multdata_0 + r_multdata_1 + r_multdata_2 + 
-                r_multdata_3 + r_multdata_4 + r_multdata_5 + r_multdata_6 + 
-                r_multdata_7 + r_multdata_8 + r_multdata_9 + r_multdata_10 + 
-                r_multdata_11 + r_multdata_12 + r_multdata_13 + r_multdata_14 + 
-                r_multdata_15);
-           
+--r_sumamult <= (r_multdata_0 + r_multdata_1 + r_multdata_2 + 
+--                r_multdata_3 + r_multdata_4 + r_multdata_5 + r_multdata_6 + 
+--                r_multdata_7 + r_multdata_8 + r_multdata_9 + r_multdata_10 + 
+--                r_multdata_11 + r_multdata_12 + r_multdata_13 + r_multdata_14 + 
+--                r_multdata_15);
+                
+            r_sumamult1 <= r_multdata_0 + r_multdata_1 + r_multdata_2 + 
+                r_multdata_3;
+            r_sumamult2 <= r_multdata_4 + r_multdata_5 + r_multdata_6 + 
+                r_multdata_7; 
+            r_sumamult3 <= r_multdata_8 + r_multdata_9 + r_multdata_10 + 
+                r_multdata_11;
+            r_sumamult4 <=  r_multdata_12 + r_multdata_13 + r_multdata_14 + 
+                r_multdata_15;                
+           r_sumamult <= r_sumamult1 + r_sumamult2 + r_sumamult3 + r_sumamult4;
         end if;    
     end process;
     
