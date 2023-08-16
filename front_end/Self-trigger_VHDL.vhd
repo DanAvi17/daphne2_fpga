@@ -74,7 +74,7 @@ architecture Behavioral of self_trigger is
     end component;
     
     signal data_hpf         : std_logic_vector(13 downto 0);
-    signal data_self_trigger: std_logic_vector(13 downto 0);
+    --signal data_self_trigger: std_logic_vector(13 downto 0);
     signal r_data_0         : signed(g_INPUT_WIDTH - 1 downto 0):= to_signed(0, g_INPUT_WIDTH);
     signal r_data_1         : signed(g_INPUT_WIDTH - 1 downto 0):= to_signed(0, g_INPUT_WIDTH);
     signal r_data_2         : signed(g_INPUT_WIDTH - 1 downto 0):= to_signed(0, g_INPUT_WIDTH);
@@ -223,9 +223,9 @@ architecture Behavioral of self_trigger is
     -- signal r_multdata_63       : signed(g_MULT_WIDTH - 1 downto 0):= to_signed(0, g_MULT_WIDTH);
     signal r_sumamult       : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
     signal r_sumamult1      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
-    signal r_sumamult2      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+    --signal r_sumamult2      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
     signal r_sumamult3      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
-    signal r_sumamult4      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+    --signal r_sumamult4      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
     
     -- signal r_pedestal      : signed(g_INPUT_WIDTH - 1 downto 0):= to_signed(0, g_INPUT_WIDTH);
     
@@ -465,21 +465,21 @@ architecture Behavioral of self_trigger is
                 o_data <= std_logic_vector(r_data_63);
                 
                 r_hpf_data_0 <= signed(data_hpf);
-                r_hpf_data_1 <= r_data_0;
-                r_hpf_data_2 <= r_data_1;
-                r_hpf_data_3 <= r_data_2;
-                r_hpf_data_4 <= r_data_3;
-                r_hpf_data_5 <= r_data_4;
-                r_hpf_data_6 <= r_data_5;
-                r_hpf_data_7 <= r_data_6;
-                r_hpf_data_8 <= r_data_7;
-                r_hpf_data_9 <= r_data_8;
-                r_hpf_data_10 <= r_data_9;
-                r_hpf_data_11 <= r_data_10;
-                r_hpf_data_12 <= r_data_11;
-                r_hpf_data_13 <= r_data_12;
-                r_hpf_data_14 <= r_data_13;
-                r_hpf_data_15 <= r_data_14;
+                r_hpf_data_1 <= r_hpf_data_0;
+                r_hpf_data_2 <= r_hpf_data_1;
+                r_hpf_data_3 <= r_hpf_data_2;
+                r_hpf_data_4 <= r_hpf_data_3;
+                r_hpf_data_5 <= r_hpf_data_4;
+                r_hpf_data_6 <= r_hpf_data_5;
+                r_hpf_data_7 <= r_hpf_data_6;
+                r_hpf_data_8 <= r_hpf_data_7;
+                r_hpf_data_9 <= r_hpf_data_8;
+                r_hpf_data_10 <= r_hpf_data_9;
+                r_hpf_data_11 <= r_hpf_data_10;
+                r_hpf_data_12 <= r_hpf_data_11;
+                r_hpf_data_13 <= r_hpf_data_12;
+                r_hpf_data_14 <= r_hpf_data_13;
+                r_hpf_data_15 <= r_hpf_data_14;
             end if;                
         end if;
     end process;
@@ -631,7 +631,7 @@ architecture Behavioral of self_trigger is
     process(clk)
     begin     
         if rising_edge(clk) then
-            if r_sumamult > 10000 then
+            if (r_sumamult > 10000) then
                 o_trigger <= '1';
             else 
                 o_trigger <= '0';
