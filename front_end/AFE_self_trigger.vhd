@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company: 
--- Engineer: Edgar Rincón-Gil
+-- Engineer: Edgar Rincon-Gil
 -- 
 -- Create Date: 11/17/2022 09:58:39 AM
 -- Design Name: self-trigger
@@ -60,33 +60,33 @@ architecture Behavioral of AFE_self_trigger is
         );
     end component;
     
-    component highPass_FirstOrder
-        generic(
-            Data_Size: integer := 14;
-            Coefficient_Resolution : integer := 17 -- One more than decimal desired
-        );
-        port(
-            rst : in std_logic; -- Reset for the filter
-            clk : in std_logic; -- Clock for the filter
-            x_in : in std_logic_vector((Data_Size - 1) downto 0); -- Input vector from AFEs
-            y_out : out std_logic_vector((Data_Size - 1) downto 0) -- Output vector from Filter
-        );            
-    end component;
+--    component highPass_FirstOrder
+--        generic(
+--            Data_Size: integer := 14;
+--            Coefficient_Resolution : integer := 17 -- One more than decimal desired
+--        );
+--        port(
+--            rst : in std_logic; -- Reset for the filter
+--            clk : in std_logic; -- Clock for the filter
+--            x_in : in std_logic_vector((Data_Size - 1) downto 0); -- Input vector from AFEs
+--            y_out : out std_logic_vector((Data_Size - 1) downto 0) -- Output vector from Filter
+--        );            
+--    end component;
     
-    signal data_hpf : array_9x14_type;
+--    signal data_hpf : array_9x14_type;
     signal data_self_trigger : std_logic_vector(13 downto 0);
 
 begin
 
-    gen_hpf: for j in 7 downto 0 generate
-        hpf_inst: highPass_FirstOrder 
-            port map(
-                rst => rst,
-                clk  => clk,
-                x_in => i_data(j),
-                y_out => data_hpf(j)
-            );
-    end generate gen_hpf;
+--    gen_hpf: for j in 7 downto 0 generate
+--        hpf_inst: highPass_FirstOrder 
+--            port map(
+--                rst => rst,
+--                clk  => clk,
+--                x_in => i_data(j),
+--                y_out => data_hpf(j)
+--            );
+--    end generate gen_hpf;
     
     
     gen_self_trigger: for i in 7 downto 0 generate
@@ -94,7 +94,7 @@ begin
             port map(
                 clk  => clk,
                 rst => rst,
-                i_data => data_hpf(i),
+                i_data => i_data(i),
                 o_data => o_data(i),
                 o_trigger => o_trigger(i)
             );
