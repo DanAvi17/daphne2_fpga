@@ -66,13 +66,13 @@ architecture stc_arch of stc is
 
     signal baseline, trigsample: std_logic_vector(13 downto 0);
 
-    component baseline256 is -- establish average signal level
-    port(
-        clock: in std_logic;
-        reset: in std_logic;
-        din: in std_logic_vector(13 downto 0);
-        baseline: out std_logic_vector(13 downto 0));
-    end component;
+    -- component baseline256 is -- establish average signal level
+    -- port(
+        -- clock: in std_logic;
+        -- reset: in std_logic;
+        -- din: in std_logic_vector(13 downto 0);
+        -- baseline: out std_logic_vector(13 downto 0));
+    -- end component;
 
 --    component trig is -- example trigger algorithm broken out separately, latency = 64 clocks
 --    port(
@@ -201,7 +201,7 @@ begin
             clk  => aclk,
             rst => reset,
             i_data  => afe_dat,
-            o_data => open, 
+            o_data => trigsample, 
             o_trigger => triggered
         );  
 
