@@ -74,15 +74,30 @@ architecture stc_arch of stc is
         baseline: out std_logic_vector(13 downto 0));
     end component;
 
-    component trig is -- example trigger algorithm broken out separately, latency = 64 clocks
-    port(
-        clock: in std_logic;
-        din: in std_logic_vector(13 downto 0);
-        baseline: in std_logic_vector(13 downto 0);
-        threshold: in std_logic_vector(13 downto 0);
-        triggered: out std_logic;
-        trigsample: out std_logic_vector(13 downto 0));
-    end component;
+--    component trig is -- example trigger algorithm broken out separately, latency = 64 clocks
+--    port(
+--        clock: in std_logic;
+--        din: in std_logic_vector(13 downto 0);
+--        baseline: in std_logic_vector(13 downto 0);
+--        threshold: in std_logic_vector(13 downto 0);
+--        triggered: out std_logic;
+--        trigsample: out std_logic_vector(13 downto 0));
+--    end component;
+
+    component self_trigger is
+        generic(
+            g_INPUT_WIDTH : natural := 14;
+            g_SUM_WIDTH   : natural := 14;
+            g_MULT_WIDTH  : natural := 28
+            );
+            port(
+            clk  : in  std_logic;
+            rst : in std_logic;
+            i_data  : in  std_logic_vector(g_INPUT_WIDTH - 1 downto 0);
+            o_data : out std_logic_vector(g_SUM_WIDTH - 1 downto 0);
+            o_trigger : out std_logic
+        );
+        end component;
 
     component CRC_OL is
     generic( Nbits: positive := 32; CRC_Width: positive := 20;
@@ -149,13 +164,13 @@ begin
 
     -- compute the average signal baseline level over the last 256 samples
 
-    baseline_inst: baseline256
-    port map(
-        clock => aclk,
-        reset => reset,
-        din => afe_dat, -- watching live AFE data
-        baseline => baseline
-    );
+--    baseline_inst: baseline256
+--    port map(
+--        clock => aclk,
+--        reset => reset,
+--        din => afe_dat, -- watching live AFE data
+--        baseline => baseline
+--    );
 
     -- now for dense data packing, we need to access up to last 4 samples at once...
 
@@ -170,15 +185,25 @@ begin
 
     -- trigger algorithm in a separate module. this latency is assumed to be 64 cycles
 
-    trig_inst: trig
-    port map(
-         clock => aclk,
-         din => afe_dat, -- watching live AFE data
-         baseline => baseline,
-         threshold => threshold,
-         triggered => triggered,
-         trigsample => trigsample -- the ADC sample that caused the trigger 
-    );        
+--    trig_inst: trig
+--    port map(
+--         clock => aclk,
+--         din => afe_dat, -- watching live AFE data
+--         baseline => baseline,
+--         threshold => threshold,
+--         triggered => triggered,
+--         trigsample => trigsample -- the ADC sample that caused the trigger 
+--    );      
+
+--EIA's selftrigger algorithm
+    trig_inst: self_trigger
+        port map(
+            clk  => aclk,
+            rst => reset,
+            i_data  => afe_dat,
+            o_data => open, 
+            o_trigger => triggered
+        );  
 
     -- FSM waits for trigger condition then assembles output frame and stores into FIFO
 
