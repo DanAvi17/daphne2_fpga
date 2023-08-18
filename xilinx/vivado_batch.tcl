@@ -25,14 +25,17 @@ read_vhdl ../spy/spy.vhd
 read_vhdl ../spi/spi.vhd
 
 read_vhdl ../core/core.vhd
- read_vhdl ../core/inmux.vhd
- read_vhdl ../core/stream/dstr4.vhd
-  read_vhdl ../core/crc20_update.vhd
- read_vhdl ../core/trig/st40_top.vhd
-  read_vhdl ../core/trig/stc.vhd
-   read_vhdl ../core/trig/baseline256.vhd
-   read_vhdl ../core/trig/trig.vhd
- read_vhdl ../core/core_mgt4.vhd
+read_vhdl ../core/inmux.vhd
+read_vhdl ../core/stream/dstr4.vhd
+read_vhdl ../core/crc20_update.vhd
+read_vhdl ../core/trig/st40_top.vhd
+read_vhdl ../core/trig/stc.vhd
+# read_vhdl ../core/trig/baseline256.vhd
+# read_vhdl ../core/trig/trig.vhd
+read_vhdl ../core/trig/Self-trigger_VHDL.vhd
+read_vhdl ../core/trig/highPass_FirstOrder.vhd
+read_vhdl ../core/trig/dsp_slice.vhd
+read_vhdl ../core/core_mgt4.vhd
 
 read_vhdl ../oei/hdl/burst_traffic_controller.vhd
 read_vhdl ../oei/hdl/ethernet_interface.vhd
