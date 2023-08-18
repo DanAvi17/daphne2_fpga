@@ -130,8 +130,8 @@ read_xdc -verbose ./constraints.xdc
 # Note this is a 7 character HEX string, e.g. 28 bits, but Vivado requires 
 # this number to be in Verilog notation, even if the top level source is VHDL.
 
-setenv Path1="C:\Program Files\Git\bin"
-setenv Path2="C:\Program Files\Git\cmd"
+#exec set Path=C:\Program Files\Git\bin
+#exec set Path=C:\Program Files\Git\cmd
 set git_sha [exec git rev-parse --short=7 HEAD]
 set v_git_sha "28'h$git_sha"
 puts "INFO: passing git commit number $v_git_sha to top level generic"
