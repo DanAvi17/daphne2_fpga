@@ -5,7 +5,9 @@
 
 # general setup stuff...
 
-set_param general.maxThreads 6
+# modified Edgar Rincon, EIA
+set_param general.maxThreads 6  
+# end modified Edgar Rincon, EIA
 set outputDir ./output
 file mkdir $outputDir
 set_part xc7a200t-fbg676-2
@@ -18,27 +20,19 @@ read_vhdl ../front_end/febit.vhd
 read_vhdl ../front_end/auto_fsm.vhd
 read_vhdl ../front_end/auto_afe.vhd
 read_vhdl ../front_end/front_end.vhd
-# read_vhdl ../front_end/Self-trigger_VHDL.vhd
-# read_vhdl ../front_end/highPass_FirstOrder.vhd
-# read_vhdl ../front_end/dsp_slice.vhd
-# read_vhdl ../front_end/AFE_self_trigger.vhd
-read_vhdl ../front_end/front_end.vhd
 
 read_vhdl ../spy/spy.vhd
 read_vhdl ../spi/spi.vhd
 
 read_vhdl ../core/core.vhd
-read_vhdl ../core/inmux.vhd
-read_vhdl ../core/stream/dstr4.vhd
-read_vhdl ../core/crc20_update.vhd
-read_vhdl ../core/trig/st40_top.vhd
-read_vhdl ../core/trig/stc.vhd
-#   read_vhdl ../core/trig/baseline256.vhd
-#   read_vhdl ../core/trig/trig.vhd
-read_vhdl ../core/core_mgt4.vhd
-read_vhdl ../core/trig/Self-trigger_VHDL.vhd
-read_vhdl ../core/trig/highPass_FirstOrder.vhd
-read_vhdl ../core/trig/dsp_slice.vhd
+ read_vhdl ../core/inmux.vhd
+ read_vhdl ../core/stream/dstr4.vhd
+  read_vhdl ../core/crc20_update.vhd
+ read_vhdl ../core/trig/st40_top.vhd
+  read_vhdl ../core/trig/stc.vhd
+   read_vhdl ../core/trig/baseline256.vhd
+   read_vhdl ../core/trig/trig.vhd
+ read_vhdl ../core/core_mgt4.vhd
 
 read_vhdl ../oei/hdl/burst_traffic_controller.vhd
 read_vhdl ../oei/hdl/ethernet_interface.vhd
@@ -136,9 +130,11 @@ read_xdc -verbose ./constraints.xdc
 # Note this is a 7 character HEX string, e.g. 28 bits, but Vivado requires 
 # this number to be in Verilog notation, even if the top level source is VHDL.
 
-#set git_sha [exec git rev-parse --short=7 HEAD]
-set v_git_sha "28'h1234567"
-#puts "INFO: passing git commit number $v_git_sha to top level generic"
+setenv Path1="C:\Program Files\Git\bin"
+setenv Path2="C:\Program Files\Git\cmd"
+set git_sha [exec git rev-parse --short=7 HEAD]
+set v_git_sha "28'h$git_sha"
+puts "INFO: passing git commit number $v_git_sha to top level generic"
 
 # synth design...
 
@@ -179,8 +175,7 @@ report_io -file $outputDir/io.rpt
 
 # generate bitstream...
 
-#write_bitstream -force -bin_file $outputDir/daphne2_$git_sha.bit
-write_bitstream -force -bin_file $outputDir/daphne2_0
+write_bitstream -force -bin_file $outputDir/daphne2_$git_sha.bit
 
 # write out ILA debug probes file
 write_debug_probes -force $outputDir/probes.ltx
