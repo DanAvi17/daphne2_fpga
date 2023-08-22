@@ -30,7 +30,7 @@ read_vhdl ../core/stream/dstr4.vhd
 read_vhdl ../core/crc20_update.vhd
 read_vhdl ../core/trig/st40_top.vhd
 read_vhdl ../core/trig/stc.vhd
-# read_vhdl ../core/trig/baseline256.vhd
+read_vhdl ../core/trig/baseline256.vhd
 # read_vhdl ../core/trig/trig.vhd
 read_vhdl ../core/trig/Self-trigger_VHDL.vhd
 read_vhdl ../core/trig/highPass_FirstOrder.vhd

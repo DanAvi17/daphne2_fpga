@@ -223,9 +223,9 @@ architecture Behavioral of self_trigger is
     -- signal r_multdata_63       : signed(g_MULT_WIDTH - 1 downto 0):= to_signed(0, g_MULT_WIDTH);
     signal r_sumamult       : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
     signal r_sumamult1      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
-    --signal r_sumamult2      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
-    signal r_sumamult3      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
-    --signal r_sumamult4      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+    signal r_sumamult2      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+    -- signal r_sumamult3      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
+    -- signal r_sumamult4      : signed(g_MULT_WIDTH -1  downto 0):= to_signed(0, g_MULT_WIDTH);
     
     -- signal r_pedestal      : signed(g_INPUT_WIDTH - 1 downto 0):= to_signed(0, g_INPUT_WIDTH);
     
@@ -613,18 +613,25 @@ architecture Behavioral of self_trigger is
     --                r_multdata_11 + r_multdata_12 + r_multdata_13 + r_multdata_14 + 
     --                r_multdata_15);
                 
-            r_sumamult1 <= r_multdata_0 + r_multdata_1 + r_multdata_2 + 
+			r_sumamult1 <= r_multdata_0 + r_multdata_1 + r_multdata_2 + 
                 r_multdata_3 + r_multdata_4 + r_multdata_5 + r_multdata_6 + 
                 r_multdata_7;
-            --r_sumamult2 <= r_multdata_4 + r_multdata_5 + r_multdata_6 + 
-              --  r_multdata_7; 
-            r_sumamult3 <= r_multdata_8 + r_multdata_9 + r_multdata_10 + 
+			r_sumamult2 <= r_multdata_8 + r_multdata_9 + r_multdata_10 + 
                 r_multdata_11 + r_multdata_12 + r_multdata_13 + r_multdata_14 + 
                 r_multdata_15;
-            --r_sumamult4 <=  r_multdata_12 + r_multdata_13 + r_multdata_14 + 
-              --  r_multdata_15;
-            r_sumamult <= r_sumamult1 + r_sumamult3;                              
-           --r_sumamult <= r_sumamult1 + r_sumamult2 + r_sumamult3 + r_sumamult4;
+			r_sumamult <= r_sumamult1 + r_sumamult2;
+	
+	
+			-- r_sumamult1 <= r_multdata_0 + r_multdata_1 + r_multdata_2 + 
+                -- r_multdata_3;
+            -- r_sumamult2 <= r_multdata_4 + r_multdata_5 + r_multdata_6 + 
+                -- r_multdata_7; 
+            -- r_sumamult3 <= r_multdata_8 + r_multdata_9 + r_multdata_10 + 
+                -- r_multdata_11;
+            -- r_sumamult4 <=  r_multdata_12 + r_multdata_13 + r_multdata_14 + 
+                -- r_multdata_15;
+            -- r_sumamult <= r_sumamult1 + r_sumamult2 + r_sumamult3 + r_sumamult4;
+			
         end if;    
     end process;
     

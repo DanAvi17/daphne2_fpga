@@ -65,14 +65,15 @@ architecture stc_arch of stc is
     signal DIP, DOP: array_4x8_type;
 
     signal baseline, trigsample: std_logic_vector(13 downto 0);
+	-- signal trigsample: std_logic_vector(13 downto 0);
 
-    -- component baseline256 is -- establish average signal level
-    -- port(
-        -- clock: in std_logic;
-        -- reset: in std_logic;
-        -- din: in std_logic_vector(13 downto 0);
-        -- baseline: out std_logic_vector(13 downto 0));
-    -- end component;
+    component baseline256 is -- establish average signal level
+		port(
+			clock: in std_logic;
+			reset: in std_logic;
+			din: in std_logic_vector(13 downto 0);
+			baseline: out std_logic_vector(13 downto 0));
+		end component;
 
 --    component trig is -- example trigger algorithm broken out separately, latency = 64 clocks
 --    port(
@@ -97,7 +98,7 @@ architecture stc_arch of stc is
             o_data : out std_logic_vector(g_SUM_WIDTH - 1 downto 0);
             o_trigger : out std_logic
         );
-        end component;
+	end component;
 
     component CRC_OL is
     generic( Nbits: positive := 32; CRC_Width: positive := 20;
@@ -164,13 +165,13 @@ begin
 
     -- compute the average signal baseline level over the last 256 samples
 
---    baseline_inst: baseline256
---    port map(
---        clock => aclk,
---        reset => reset,
---        din => afe_dat, -- watching live AFE data
---        baseline => baseline
---    );
+   baseline_inst: baseline256
+	   port map(
+		   clock => aclk,
+		   reset => reset,
+		   din => afe_dat, -- watching live AFE data
+		   baseline => baseline
+	   );
 
     -- now for dense data packing, we need to access up to last 4 samples at once...
 
